@@ -3,20 +3,30 @@ import { useEffect, useState } from "react";
 // import * as THREE from "three";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function VideoPlane({ videoUrl, ...props }: any) {
-    const [video] = useState(() =>
-        // Object.assign permite copiar propiedades de uno o más objetos fuente a un objeto destino.
-        // Aquí, se crea un elemento de video y se le asignan varias propiedades.
-        Object.assign(document.createElement("video"), {
-            src: videoUrl, // La fuente del video, que es una prop que se pasa al componente.
-            crossOrigin: "anonymous", // Configura el atributo crossOrigin para permitir cargar recursos de diferentes dominios.
-            muted: true, // Se muestra el video sin sonido.
-            loop: true, // El video se reproducirá en bucle continuamente.
-        })
-    )
+    const [video, setVideo] = useState<HTMLVideoElement | null>(null);
 
     useEffect(() => {
-        video.play();
-    }, [video]);
+        const videoElement = Object.assign(document.createElement("video"), {
+            src: videoUrl,
+            crossOrigin: "anonymous",
+            muted: true,
+            loop: true,
+        });
+
+        videoElement.addEventListener('error', (e) => {
+            console.error('Error loading video:', e);
+        });
+
+        videoElement.addEventListener('loadeddata', () => {
+            videoElement.play().catch(error => {
+                console.error('Error playing video:', error);
+            });
+        });
+
+        setVideo(videoElement);
+    }, [videoUrl]);
+
+    if (!video) return null;
     return (
         <>
             <mesh
