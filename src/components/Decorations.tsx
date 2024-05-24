@@ -11,7 +11,6 @@ export function Decorations() {
                     position={[-7, 1, 1.6]}
                     scale={[4.2, 2, 2]}
                 >
-                    {" "}
                     {/* Es una caja con los bordes redondeados, estos se redondean con el atributo smoothness y radius*/}
                     <meshStandardMaterial
                         color="#f4ae00"
