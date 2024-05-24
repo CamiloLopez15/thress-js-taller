@@ -59,9 +59,9 @@ export function HomeScene() {
             <group position={[0, -3, 0]}>
                 {/* // Es como el div en HTML, pero con un aspecto 3D, nos permite agrupar meshes */}
 
-                <VideoPlane videoUrl="/video-gatos.mp4" />
+                <VideoPlane videoUrl="/suiza.mp4" />
                 <VideoPlane
-                    videoUrl="/video-gatos.mp4"
+                    videoUrl="/suiza.mp4"
                     position={[0, 5, -0.51]}
                     rotation-y={Math.PI} /* Rotar 180° en el eje Y */
                 />
